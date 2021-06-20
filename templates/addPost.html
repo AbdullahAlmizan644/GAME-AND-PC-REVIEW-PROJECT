@@ -1,0 +1,81 @@
+{% extends "baseDashboard.html" %}
+{% block title %} Tables {% endblock%}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Add post On blog</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">Add post On blog</li>
+            </ol>
+            <hr>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Add post On blog
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <form action="/addPost" method="POST", enctype = "multipart/form-data">
+                            <br>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" name="tagline" placeholder="Enter Heading">
+                                <label for="floatingInput">Tagline</label>
+                            </div>
+                            <br>
+                            <h4>Select Catagory</h4>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="category" id="exampleRadios1" value="pc review"
+                                    checked>
+                                <label class="form-check-label" for="exampleRadios1">
+                                    Pc review
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="category" id="exampleRadios2" value="game review">
+                                <label class="form-check-label" for="exampleRadios2">
+                                    Game Review
+                                </label>
+                            </div>
+                            <br>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupFile01">Upload First image</label>
+                                <input type="file" class="form-control" id="inputGroupFile01" name="firstImage">
+                            </div>
+                            <br>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Enter Heading" name="firstContent">
+                                <label for="floatingInput">First Content</label>
+                            </div>
+                            <br>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Enter Heading" name="secondHeading">
+                                <label for="floatingInput">Second Heading</label>
+                            </div>
+                            <br>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupFile01">Upload Second image if necessary </label>
+                                <input type="file" class="form-control" id="inputGroupFile01" name="secondImage">
+                            </div>
+                            <br>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Enter Heading" name="secondContent">
+                                <label for="floatingInput">Second Content</label>
+                            </div>
+                            <br>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-dark" type="submit">Add Post</button>
+                            </div>
+                        </form>
+                
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    {% endblock %}

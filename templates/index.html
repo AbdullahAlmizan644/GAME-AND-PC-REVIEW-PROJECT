@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock%}
+
+{% block content %}
+
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{url_for ("static", filename="img/home.jpg")}}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Tech World</h1>
+                    <span class="subheading">Best Place For Game And Pc Reviewer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page content-->
+<div class="container">
+    <div class="row">
+        {% for post in posts[:1] %}
+        {% set image ="img/"+post.firstImage %}
+        {% set content = post.firstContent[0:500] %}
+        
+
+        <!-- Blog entries-->
+        <div class="col-lg-8">
+            <!-- Featured blog post-->
+            <div class="card mb-4">
+                <a href="#!"><img class="card-img-top" src={{url_for("static", filename=image)}}
+                        alt="..." /></a>
+                <div class="card-body">
+                    <div class="small text-muted">{{post.date}}</div>
+                    <h2 class="card-title">{{post.tagline}}</h2>
+                    <p class="card-text">{{content}}........</p>
+                    <a class="btn btn-primary" href="/post/{{post.tagline}}">Read more →</a>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- Nested row for non-featured blog posts-->
+            <div class="row">
+                {% for post in posts[1:] %}
+                {% set image ="img/"+post.firstImage %}
+                {% set content = post.firstContent[0:500] %}
+                {% set tagline = post.tagline[0:200] %}
+                <div class="col-lg-6">
+                    <!-- Blog post-->
+                    <div class="card mb-4">
+                        <a href="#!"><img class="card-img-top" src={{url_for("static", filename=image)}}
+                                alt="..." /></a>
+                        <div class="card-body">
+                            <div class="small text-muted">{{post.date}}</div>
+                            <h2 class="card-title h4">{{tagline}}</h2>
+                            <p class="card-text">{{content}}............</p>
+                            <a class="btn btn-primary" href="/post/{{post.tagline}}">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+            <!-- Pagination-->
+            <nav aria-label="Pagination">
+                <hr class="my-0" />
+                <ul class="pagination justify-content-center my-4">
+                    <li class="page-item" style="padding:0px 100px;"><a class="page-link" href="{{prev}}" >Newer Post</a></li>
+                    <br>
+                    <br>
+                    <li class="page-item"><a class="page-link" href="{{next}}">Older Post</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- Side widgets-->
+        <div class="col-lg-4">
+            <!-- Search widget-->
+            <div class="card mb-4">
+                <div class="card-header">Search</div>
+                <form action="/" method="post">
+                <div class="card-body">
+                    <div class="input-group">
+                        <input class="form-control" type="text" placeholder="Enter search term..."
+                            aria-label="Enter search term..." aria-describedby="button-search" name="search" />
+                        <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <!-- Categories widget-->
+            <div class="card mb-4">
+                <div class="card-header">Categories</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="/pcReview">Pc Review</a></li>
+                                <li><a href="/gameReview">Game Review</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Side widget-->
+            <!--<div class="card mb-4">
+                <div class="card-header">Side Widget</div>
+                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use,
+                    and feature the Bootstrap 5 card component!</div>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %} Post {% endblock%}
+
+{% block content %}
+
+{% set image1 ="img/"+post.firstImage %}
+{% set image2 ="img/"+post.secondImage %}
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{url_for ("static", filename=image1)}}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>{{post.tagline}}</h1>
+                    <h2 class="subheading">writer</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="#!">{{post.writer}}</a>
+                        {{post.date}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+{% set f1000=post.firstContent[0:1000]%}
+{% set f2000=post.firstContent[1001:2000]%}
+{% set f3000=post.secondContent%}
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h2 class="section-heading">{{post.firstHeading}}</h2>
+                <p>{{f1000}}</p>
+                <p>{{f2000}}</p>
+                <a href="#!"><img class="img-fluid" src={{ url_for("static", filename=image2)}} alt="..." /></a>
+                <h2 class="section-heading">{{post.secondHeading}}</h2>
+                <p>{{f3000}}</p>
+                &middot; Images by
+                <a href="">Internet</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div class="container">
+    <link href={{url_for("static", filename="comment/comment.css")}} rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    {% set all = comments|length %}
+
+    <div class="container">
+        <div class="be-comment-block">
+            <h1 class="comments-title">Comments {{all}}</h1>
+            <div class="be-comment">
+            {% for comment in comments %}
+                <div class="be-img-comment">
+                    <a href="blog-detail-2.html">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="be-ava-comment">
+                    </a>
+                </div>
+                <div class="be-comment-content">
+
+                    <span class="be-comment-name">
+                        <a href="#">{{comment.name}}</a>
+                    </span>
+                    <span class="be-comment-time" style="color: blue;">
+                        <i class="fa fa-clock-o"></i>
+                        {{comment.date}}
+                    </span>
+
+                    <p class="be-comment-text" style="color: lightcoral">
+                        {{comment.comment}}
+                    </p>
+                </div>
+              {% endfor %}
+            </div>
+
+            <form class="form-block" action="/post/{{post.tagline}}" method="POST">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <textarea class="form-input" required=""  style="color: lightcoral" name="comment" placeholder="Write Your Comment...."></textarea>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-info" type="submit" >Post Comment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
